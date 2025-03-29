@@ -235,11 +235,28 @@ const portraits = [
     { id: 13, title: ' ', image: figure12, description: "" },
 ];
 
-const Portfolio = () => {
-    const [selectedOeuvreId, setSelectedOeuvreId] = useState<number | null>(null);
+interface Oeuvre {
+    id: number;
+    title: string;
+    image: string;
+    description: string;
+}
 
-    const handleToggle = (id: number) => {
-        setSelectedOeuvreId(selectedOeuvreId === id ? null : id);
+interface Portrait extends Oeuvre {
+    description: string;
+}
+
+const Portfolio = () => {
+    const [selectedOeuvre, setSelectedOeuvre] = useState<Oeuvre | Portrait | null>(null);
+
+    const handleOeuvreClick = (oeuvre: Oeuvre | Portrait) => {
+        setSelectedOeuvre(oeuvre);
+        document.body.style.overflow = "hidden"; // Empêche le défilement de la page
+    };
+
+    const closeModal = () => {
+        setSelectedOeuvre(null);
+        document.body.style.overflow = "auto"; // Réactive le défilement
     };
 
     return (
@@ -248,6 +265,7 @@ const Portfolio = () => {
             <h1 className="text-3xl font-normal text-center text-accent mb-4">
                 Découvrez mes œuvres et projets artistiques
             </h1>
+
             <Title title="TABLEAUX ABSTRAITS" />
             <div className="grid md:grid-cols-3 gap-4 mb-10">
                 {abstraits.map((abstrait) => (
@@ -255,16 +273,15 @@ const Portfolio = () => {
                         <img
                             src={abstrait.image}
                             alt={abstrait.title}
-                            className="w-full rounded-xl h-56 object-cover cursor-pointer"
-                            onClick={() => handleToggle(abstrait.id)}
+                            className="w-full rounded-xl h-56 object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                            onClick={() => handleOeuvreClick(abstrait)}
                         />
                         <h1 className="my-2 font-bold">{abstrait.title}</h1>
-                        {selectedOeuvreId === abstrait.id && (
-                            <p className="text-gray-600 bg-white p-2 rounded-md shadow-md">{abstrait.description}</p>
-                        )}
+                        <p className=" line-clamp-2">{abstrait.description}</p>
                     </div>
                 ))}
             </div>
+
             <Title title="TABLEAUX FIGURATIFS ET VIDEOS" />
             <div className="grid md:grid-cols-3 gap-4">
                 {portraits.map((portrait) => (
@@ -272,16 +289,15 @@ const Portfolio = () => {
                         <img
                             src={portrait.image}
                             alt={portrait.title}
-                            className="w-full rounded-xl h-56 object-cover cursor-pointer"
-                            onClick={() => handleToggle(portrait.id)}
+                            className="w-full rounded-xl h-56 object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                            onClick={() => handleOeuvreClick(portrait)}
                         />
                         <h1 className="my-2 font-bold">{portrait.title}</h1>
-                        {selectedOeuvreId === portrait.id && (
-                            <p className="text-gray-600 bg-white p-2 rounded-md shadow-md">{portrait.description}</p>
-                        )}
+                        <p className="text-gray-600 line-clamp-2">{portrait.description}</p>
                     </div>
                 ))}
             </div>
+
             <div className="grid md:grid-cols-3 gap-4 mt-5">
                 {[video1, video2, video3, video7, video8, video9].map((video, index) => (
                     <div key={index} className="bg-base-300 p-5 h-fit rounded-lg shadow-lg">
@@ -292,8 +308,43 @@ const Portfolio = () => {
                     </div>
                 ))}
             </div>
+
+            {/* Modal pour l'affichage en grand */}
+            {selectedOeuvre && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+                    onClick={closeModal}
+                >
+                    <div className="relative w-full max-w-6xl max-h-[90vh]">
+                        <button
+                            onClick={closeModal}
+                            className="absolute -top-10 right-0 text-white text-4xl hover:text-accent transition-colors"
+                        >
+                            &times;
+                        </button>
+
+                        <div className="flex flex-col md:flex-row gap-8 h-full">
+                            {/* Image - prend toute la largeur sur mobile */}
+                            <div className="flex-1 md:max-w-[50%]">
+                                <img
+                                    src={selectedOeuvre.image}
+                                    alt={selectedOeuvre.title}
+                                    className="w-full max-h-[60vh] md:max-h-[80vh] object-contain"
+                                />
+                            </div>
+
+                            {/* Description - en dessous sur mobile, à côté sur desktop */}
+                            <div className="flex-1 text-white overflow-y-auto max-h-[30vh] md:max-h-[80vh] bg-black bg-opacity-50 p-4 rounded-lg">
+                                <h2 className="text-2xl md:text-3xl font-bold mb-4">{selectedOeuvre.title}</h2>
+                                <p className="whitespace-pre-line text-sm md:text-base">{selectedOeuvre.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
+
 
 export default Portfolio;
