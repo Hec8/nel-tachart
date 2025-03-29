@@ -236,9 +236,9 @@ const portraits = [
 ];
 
 const Portfolio = () => {
-    const [selectedOeuvreId, setSelectedOeuvreId] = useState(null);
+    const [selectedOeuvreId, setSelectedOeuvreId] = useState<number | null>(null);
 
-    const handleToggle = (id) => {
+    const handleToggle = (id: number) => {
         setSelectedOeuvreId(selectedOeuvreId === id ? null : id);
     };
 
