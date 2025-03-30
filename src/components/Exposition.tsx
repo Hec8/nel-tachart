@@ -1,15 +1,15 @@
 import Title from "./Title";
-import oeuvre1 from "../assets/oeuvre1.jpg";
-import oeuvre2 from "../assets/oeuvre2.jpg";
-import oeuvre3 from "../assets/oeuvre3.jpg";
-import oeuvre4 from "../assets/oeuvre4.jpg";
-import oeuvre5 from "../assets/oeuvre5.jpg";
-import oeuvre6 from "../assets/oeuvre6.jpg";
+import oeuvre1 from "../assets/accueil1.jpg";
+import oeuvre2 from "../assets/accueil2.jpg";
+import oeuvre3 from "../assets/accueil5.jpg";
+import oeuvre4 from "../assets/accueil3.jpg";
+import oeuvre5 from "../assets/accueil4.jpg";
+import oeuvre6 from "../assets/accueil6.jpg";
 
 const oeuvres = [
-    { id: 1, title: "Les jumeaux au Bénin : des messagers divins", image: oeuvre1 },
-    { id: 2, title: "Le musicien", image: oeuvre2 },
-    { id: 3, title: "Vidomègon : Enfant placé", image: oeuvre3 },
+    { id: 1, title: "", image: oeuvre1 },
+    { id: 2, title: "", image: oeuvre2 },
+    { id: 3, title: "", image: oeuvre3 },
     { id: 4, title: "", image: oeuvre4 },
     { id: 5, title: "", image: oeuvre5 },
     { id: 6, title: "", image: oeuvre6 },
@@ -28,11 +28,6 @@ const Exposition = () => {
                         <h1 className="my-2 font-bold">{oeuvre.title}</h1>
                     </div>
                 ))}
-            </div>
-
-            {/* Bouton centré */}
-            <div className="flex justify-center mt-6 ">
-                <a href="/portfolio" className="btn btn-accent">Voir plus</a>
             </div>
         </div>
     );

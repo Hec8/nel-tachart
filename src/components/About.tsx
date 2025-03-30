@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 const About = () => {
     return (
         <div className="px-6 py-16 md:px-24" id="About">
-            <Title title="A PROPOS" />
+            <Title title="L'ARTISTE" />
             <div className="bg-base-200 flex justify-center items-center py-10">
                 <div className="flex flex-col-reverse lg:flex-row items-center lg:items-start max-w-6xl mx-auto">
                     {/* Texte */}
                     <div className="text-center lg:text-left space-y-4 lg:w-1/2 px-4">
                         <h1 className="text-3xl md:text-5xl font-bold">
-                            A PROPOS DE NEL TACHART!
+                            A PROPOS DE NEL TACHART
                         </h1>
                         <p className="py-4">
                             Nel Tachart de son vrai nom, Léonel ZADJI est un artiste béninois qui peint sur et sous du verre

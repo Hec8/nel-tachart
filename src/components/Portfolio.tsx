@@ -1,11 +1,6 @@
 import { useState } from "react";
 import Title from "./Title";
-import abstrait2 from "../assets/moto.jpg";
-import abstrait3 from "../assets/jsp.jpg";
 import abstrait4 from "../assets/homepage.jpg";
-import abstrait5 from "../assets/oeuvre7.jpg";
-import abstrait6 from "../assets/oeuvre8.jpg";
-import abstrait7 from "../assets/oeuvre9.jpg";
 import abstrait8 from "../assets/matuvu.jpg";
 import abstrait9 from "../assets/apparences.jpg";
 import abstrait10 from "../assets/etudiant.jpg";
@@ -19,9 +14,6 @@ import abstrait17 from "../assets/tableaux figuratifs/ensemble.jpg";
 import abstrait18 from "../assets/labeur.jpg";
 import abstrait19 from "../assets/allegorie.jpg";
 import abstrait20 from "../assets/autoch.jpg";
-import abstrait21 from "../assets/oppose.jpg";
-import abstrait22 from "../assets/masque.jpg";
-import abstrait23 from "../assets/dualite.jpg";
 import abstrait24 from "../assets/influence.jpg";
 import abstrait25 from "../assets/coeur.jpg";
 import abstrait26 from "../assets/voyage.png";
@@ -52,29 +44,11 @@ import figure9 from "../assets/tableaux figuratifs/yass.jpg";
 import figure10 from "../assets/tableaux figuratifs/zinsou.jpg";
 import figure11 from "../assets/tableaux figuratifs/figura2.jpg";
 import figure12 from "../assets/tableaux figuratifs/figura3.jpg";
-import video1 from "../assets/tableaux figuratifs/vid1.mp4";
-import video2 from "../assets/tableaux figuratifs/vid2.mp4";
-import video3 from "../assets/tableaux figuratifs/vid3.mp4";
-import video7 from "../assets/tableaux figuratifs/vid7.mp4";
-import video8 from "../assets/tableaux figuratifs/vid8.mp4";
-import video9 from "../assets/tableaux figuratifs/vid9.mp4";
 
 const abstraits = [
     {
         id: 19, title: 'Les autochtones', image: abstrait20, description:
             "Cette œuvre captivante présente quatre portraits stylisés alignés et vêtus avec des éléments de recyclage, où des visages aborigène simplifiés et enfantins se distinguent par des traits noirs épais et des couleurs vives. Chaque figure, ornée de symboles évoquant la mémoire collective et d'une coiffure unique, invite à réfléchir sur le thème de l'identité et de l'appartenance à un groupe tribal ou ethnique."
-    },
-    {
-        id: 20, title: 'Origines opposées', image: abstrait21, description:
-            "Cette peinture captivante met en scène deux figures stylisées : l'une est bleue et carrée, tandis que l'autre est jaune et ronde. Avec des formes minimalistes et des lignes épaisses pour les contours, l'arrière-plan vaporeux crée une atmosphère à la fois romantique et pudique. Les figures semblent s'approcher, suggérant un baiser ou un contact, ce qui génère un sentiment d'intimité dans un respect mutuel."
-    },
-    {
-        id: 21, title: 'Le masque sociétal', image: abstrait22, description:
-            "Ce tableau met en lumière le contraste entre la façade (le masque bleu) et la réalité intérieure (la partie rouge et rose), illustrant la nécessité de maintenir une image publique, parfois glamour, tout en cachant des émotions profondes. Il révèle ainsi la complexité de la dissimulation et la tension entre l'apparence et la réalité, montrant comment les individus se cachent derrière un masque tout en luttant intérieurement."
-    },
-    {
-        id: 22, title: 'La dualité', image: abstrait23, description:
-            "Cette œuvre d'art fascinante explore les thèmes de l'identité, de la dualité et de l'expression individuelle. La figure qui arbore des teintes de bleu céruléen et de rouge timide semble représenter une mélancolie et une réflexion intérieure, tandis que la figure animée par le vert luxuriant et le jaune solaire évoque une vitalité et une passion plus intense. Cette juxtaposition souligne que, même si elles partagent une forme et un cadre communs, leurs expériences et leurs émotions sont fondamentalement différentes, renvoyant à l'idée que chaque individu, même dans des contextes similaires, développe une identité unique."
     },
     {
         id: 23, title: 'Influence', image: abstrait24, description:
@@ -143,26 +117,6 @@ const abstraits = [
     {
         id: 39, title: 'Femme africaine', image: abstrait40, description:
             "Ce tableau abstrait représente une figure humaine féminine sur un fond rouge foncé. Avec un style expressif utilisant des lignes noires épaisses et des formes géométriques simples, il intègre des touches de jaune et de doré, suggérant des parures et des vêtements. Le visage, stylisé et presque caricatural, évoque une naïveté et une sophistication de la gente. Cette œuvre fusionne des éléments figuratifs et abstraits, mettant en lumière la beauté de toutes les femmes, en particulier celles d'Afrique avec de généreuses formes."
-    },
-    {
-        id: 1, title: 'La traîtrise', image: abstrait5, description:
-            "L'œuvre présente deux silhouettes stylisées, l'une tracée à l'encre noire et l'autre avec des couleurs roses sur un fond mixte de blanc, violet, bleu et rose, créant ainsi une atmosphère vibrante. Ce fond évoque un mouvement fluide et tourbillonnant, suggérant une accolade chargée d'émotion. Les silhouettes, simplifiées et réalisées avec des lignes droites, évoquent des corps humains, ce qui renforce l'idée d'une connexion entre les figures."
-    },
-    {
-        id: 5, title: 'Le cycle de la vie', image: abstrait6, description:
-            "Ce tableau captivant présente une horloge stylisée, où de petites figurines humaines remplacent les chiffres. Chaque instant est ainsi rempli par des actions et des vies. Le cercle jaune vif qui entoure l'horloge, associé à des nuances de noir et d'or en arrière-plan, symbolise le passage du temps et du destin. L'or représente la prospérité, tandis que le noir évoque l'adversité. "
-    },
-    {
-        id: 6, title: 'Identité culturelle', image: abstrait7, description:
-            "Ce tableau révèle un visage stylisé et expressif, avec une esthétique brute et des couleurs vives qui captent l'œil. Les traits simplifiés, associés à des éléments distinctifs comme les scarifications, explorent l'identité et l'héritage culturel. L'expression faciale, difficile à cerner, évoque la surprise, le questionnement et une certaine crainte."
-    },
-    {
-        id: 2, title: 'Zemidjan : des héros en danger', image: abstrait2, description:
-            " Cette œuvre, représentant une scène de vie quotidienne, peut également symboliser des thèmes plus profonds tels que l'insécurité, la précarité et les conditions de travail difficiles des taxi motos, appelés ZEMIDJAN, au Bénin."
-    },
-    {
-        id: 3, title: 'Dichotomie de la vie', image: abstrait3, description:
-            "Ce tableau illustre une scène en deux parties sur un fond bleu profond. D'un côté, des figures stylisées, presque abstraites, semblent célébrer, évoquant une ambiance festive. De l'autre, d'autres figures similaires sont engagées dans une activité laborieuse, suggérant le travail et l'effort. Les lignes blanches et jaunes qui traversent la toile créent une séparation visuelle entre ces deux mondes, accentuant le contraste entre plaisir et travail."
     },
     {
         id: 4, title: 'Réalités sociales', image: abstrait4, description:
@@ -294,17 +248,6 @@ const Portfolio = () => {
                         />
                         <h1 className="my-2 font-bold">{portrait.title}</h1>
                         <p className="text-gray-600 line-clamp-2">{portrait.description}</p>
-                    </div>
-                ))}
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-4 mt-5">
-                {[video1, video2, video3, video7, video8, video9].map((video, index) => (
-                    <div key={index} className="bg-base-300 p-5 h-fit rounded-lg shadow-lg">
-                        <video className="w-full rounded-xl" controls>
-                            <source src={video} type="video/mp4" />
-                            Votre navigateur ne supporte pas la lecture des vidéos.
-                        </video>
                     </div>
                 ))}
             </div>

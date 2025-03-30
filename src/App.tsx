@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Temoignages from "./components/Temoignages";
 import Portfolio from "./components/Portfolio";
 import AboutPlus from "./components/AboutPlus";
+import Video from "./components/Videos";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
               </>
             } />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/videos" element={<Video />} />
             <Route path="/about-suite" element={<AboutPlus />} />
           </Routes>
           <Footer />

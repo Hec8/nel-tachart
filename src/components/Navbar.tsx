@@ -9,15 +9,15 @@ const Navbar = () => {
         <div className="flex justify-between items-center p-4  shadow-md">
             {/* Logo */}
             <Link to="/" className="flex items-center font-bold text-3xl md:text-xl">
-                <Palette className="mr-1" /><span className="text-accent">TACHART</span>
+                <Palette className="mr-1" /><span className="mr-1">Nel</span><span className="text-accent">TACHART</span>
             </Link>
 
             {/* Menu pour desktop */}
             <ul className="hidden md:flex space-x-4">
                 <li><Link to="/" className="btn btn-sm btn-ghost">Accueil</Link></li>
-                <li><a href="#About" className="btn btn-sm btn-ghost">À propos</a></li>
-                <li><a href="#Exposition" className="btn btn-sm btn-ghost">Expositions</a></li>
+                <li><a href="/about-suite" className="btn btn-sm btn-ghost">L'Artiste</a></li>
                 <li><Link to="/portfolio" className="btn btn-sm btn-ghost">Portfolio</Link></li>
+                <li><a href="/videos" className="btn btn-sm btn-ghost">Vidéos</a></li>
                 <li><a href="#Contact" className="btn btn-sm btn-ghost">Contact</a></li>
             </ul>
 
@@ -34,9 +34,9 @@ const Navbar = () => {
                 <div className="absolute top-16 left-0 w-full bg-accent md:hidden z-50 ">
                     <ul className="flex flex-col items-center space-y-4 p-4">
                         <li><Link to="/" className="btn btn-ghost" onClick={() => setIsOpen(false)}>Accueil</Link></li>
-                        <li><a href="#About" className="btn btn-ghost" onClick={() => setIsOpen(false)}>À propos</a></li>
-                        <li><a href="#Exposition" className="btn btn-ghost" onClick={() => setIsOpen(false)}>Expositions</a></li>
+                        <li><a href="/about-suite" className="btn btn-ghost" onClick={() => setIsOpen(false)}>L'Artiste</a></li>
                         <li><Link to="/portfolio" className="btn btn-ghost" onClick={() => setIsOpen(false)}>Portfolio</Link></li>
+                        <li><a href="/videos" className="btn btn-ghost" onClick={() => setIsOpen(false)}>Vidéos</a></li>
                         <li><a href="#Contact" className="btn btn-ghost" onClick={() => setIsOpen(false)}>Contact</a></li>
                     </ul>
                 </div>
