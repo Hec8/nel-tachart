@@ -15,9 +15,9 @@ const Navbar = () => {
             {/* Menu pour desktop */}
             <ul className="hidden md:flex space-x-4">
                 <li><Link to="/" className="btn btn-sm btn-ghost">Accueil</Link></li>
-                <li><a href="/about-suite" className="btn btn-sm btn-ghost">L'Artiste</a></li>
+                <li><Link to="/about-suite" className="btn btn-sm btn-ghost">L'Artiste</Link></li>
                 <li><Link to="/portfolio" className="btn btn-sm btn-ghost">Portfolio</Link></li>
-                <li><a href="/videos" className="btn btn-sm btn-ghost">Vidéos</a></li>
+                <li><Link to="/videos" className="btn btn-sm btn-ghost">Vidéos</Link></li>
                 <li><a href="#Contact" className="btn btn-sm btn-ghost">Contact</a></li>
             </ul>
 
@@ -34,9 +34,9 @@ const Navbar = () => {
                 <div className="absolute top-16 left-0 w-full bg-accent md:hidden z-50 ">
                     <ul className="flex flex-col items-center space-y-4 p-4">
                         <li><Link to="/" className="btn btn-ghost" onClick={() => setIsOpen(false)}>Accueil</Link></li>
-                        <li><a href="/about-suite" className="btn btn-ghost" onClick={() => setIsOpen(false)}>L'Artiste</a></li>
+                        <li><Link to="/about-suite" className="btn btn-ghost" onClick={() => setIsOpen(false)}>L'Artiste</Link></li>
                         <li><Link to="/portfolio" className="btn btn-ghost" onClick={() => setIsOpen(false)}>Portfolio</Link></li>
-                        <li><a href="/videos" className="btn btn-ghost" onClick={() => setIsOpen(false)}>Vidéos</a></li>
+                        <li><Link to="/videos" className="btn btn-ghost" onClick={() => setIsOpen(false)}>Vidéos</Link></li>
                         <li><a href="#Contact" className="btn btn-ghost" onClick={() => setIsOpen(false)}>Contact</a></li>
                     </ul>
                 </div>
