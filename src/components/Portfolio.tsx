@@ -236,7 +236,7 @@ const Portfolio = () => {
                 ))}
             </div>
 
-            <Title title="TABLEAUX FIGURATIFS ET VIDEOS" />
+            <Title title="TABLEAUX FIGURATIFS" />
             <div className="grid md:grid-cols-3 gap-4">
                 {portraits.map((portrait) => (
                     <div key={portrait.id} className="bg-base-300 p-5 h-fit rounded-lg shadow-lg">

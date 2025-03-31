@@ -1,8 +1,11 @@
 import Title from "./Title";
 import about from "../assets/about.jpg";
-import { Link } from "react-router-dom";
 
 const About = () => {
+    // Chemins vers les fichiers PDF (à adapter selon votre structure de fichiers)
+    const frenchPDF = "/pdf/biofr.pdf";
+    const englishPDF = "/pdf/bioen.pdf";
+
     return (
         <div className="px-6 py-16 md:px-24" id="About">
             <Title title="L'ARTISTE" />
@@ -16,12 +19,27 @@ const About = () => {
                         <p className="py-4">
                             Nel Tachart de son vrai nom, Léonel ZADJI est un artiste béninois qui peint sur et sous du verre
                             transparent, autodidacte, né le 1er Mars en 1997 à Cotonou au Bénin. Il a grandi dans les environs
-                            de la Place de l’Etoile Rouge en plein centre-ville et réside actuellement à Dèkoungbé un quartier
+                            de la Place de l'Etoile Rouge en plein centre-ville et réside actuellement à Dèkoungbé un quartier
                             populaire de Cotonou, où son univers est confiné dans un atelier.
                         </p>
-                        <Link to="/about-suite" className="btn btn-accent">
-                            En savoir plus
-                        </Link>
+
+                        {/* Boutons de téléchargement */}
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a
+                                href={frenchPDF}
+                                download="Biographie-Nel-Tachart-FR.pdf"
+                                className="btn btn-accent flex-1"
+                            >
+                                Télécharger Bio (FR)
+                            </a>
+                            <a
+                                href={englishPDF}
+                                download="Biography-Nel-Tachart-EN.pdf"
+                                className="btn btn-outline btn-accent flex-1"
+                            >
+                                Download Bio (EN)
+                            </a>
+                        </div>
                     </div>
 
                     {/* Image */}
