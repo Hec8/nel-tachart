@@ -14,7 +14,7 @@ const Home = () => {
                         <div className="max-w-md">
                             <h1 className="mb-5 text-5xl font-bold">NEL TACHART</h1>
                             <p className="mb-5 font-semibold">
-                                Artiste peintre - Bodypainter - Déco designer
+                                Artiste peintre - Déco designer
                             </p>
                             <Link to="/portfolio" className="btn btn-accent">Explorer mon art</Link>
                         </div>
