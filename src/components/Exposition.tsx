@@ -6,6 +6,9 @@ import oeuvre4 from "../assets/accueil3.jpg";
 import oeuvre5 from "../assets/accueil4.jpg";
 import oeuvre6 from "../assets/accueil6.jpg";
 import { motion } from "framer-motion";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
+import { useState, useCallback } from "react";
 
 const oeuvres = [
     { id: 1, title: "", image: oeuvre1 },
@@ -56,6 +59,14 @@ const imageVariants = {
 };
 
 const Exposition = () => {
+    const [loadedImages, setLoadedImages] = useState<{[key: string]: boolean}>({});
+
+    const handleImageLoad = useCallback((id: number) => {
+        setLoadedImages(prev => ({
+            ...prev,
+            [id]: true
+        }));
+    }, []);
     return (
         <motion.div 
             id="Exposition"
@@ -87,11 +98,21 @@ const Exposition = () => {
                             className="overflow-hidden rounded-xl"
                             variants={imageVariants}
                         >
-                            <img 
-                                src={oeuvre.image} 
-                                alt={oeuvre.title} 
-                                className="w-full h-56 object-cover"
-                            />
+                            <div className="relative h-56 bg-gray-100 rounded-xl overflow-hidden">
+                                {!loadedImages[oeuvre.id] && (
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <div className="w-8 h-8 border-4 border-accent/30 border-t-accent rounded-full animate-spin"></div>
+                                    </div>
+                                )}
+                                <LazyLoadImage
+                                    src={oeuvre.image}
+                                    alt={oeuvre.title}
+                                    effect="opacity"
+                                    className={`w-full h-full object-cover transition-opacity duration-500 ${loadedImages[oeuvre.id] ? 'opacity-100' : 'opacity-0'}`}
+                                    afterLoad={() => handleImageLoad(oeuvre.id)}
+                                    threshold={100}
+                                />
+                            </div>
                         </motion.div>
                         <motion.h1 
                             className="my-2 font-bold"

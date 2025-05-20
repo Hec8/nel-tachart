@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 import Title from "./Title";
 import abstrait4 from "../assets/homepage.jpg";
 import abstrait8 from "../assets/matuvu.jpg";
@@ -160,7 +163,7 @@ const abstraits = [
     },
     {
         id: 16, title: 'Ensemble pour le meilleur et contre le pire', image: abstrait17, description:
-            "Ce tableau présente une représentation stylisée d'un couple sous un parapluie. Les personnages sont réduits à des formes linéaires jaune vif sur un fond abstrait bleu et vert. Le parapluie, également représenté de manière schématique, les surplombe. Le parapluie est un symbole évident de protection et de soin mutuel. Il suggère que le couple se soutient l'un l'autre face aux aléas de la vie. Le fond abstrait, avec ses nuances potentiellement sombres, peut symboliser les défis et les difficultés auxquels le couple doit faire face. Le parapluie les protège de cette \"tempête"
+            "Ce tableau présente une représentation stylisée d'un couple sous un parapluie. Les personnages sont réduits à des formes linéaires jaune vif sur un fond abstrait bleu et vert. Le parapluie, également représenté de manière schématique, les surplombe. Le parapluie est un symbole évident de protection et de soin mutuel. Il suggère que le couple se soutient l'un l'autre face aux aléas de la vie. Le fond abstrait, avec ses nuances potentiellement sombres, peut symboliser les défis et les difficultés auxquels le couple doit faire face. Le parapluie les protège de cette \"tempête\"."
     },
     {
         id: 17, title: 'Le labeur accablant', image: abstrait18, description:
@@ -200,94 +203,282 @@ interface Portrait extends Oeuvre {
     description: string;
 }
 
-const Portfolio = () => {
-    const [selectedOeuvre, setSelectedOeuvre] = useState<Oeuvre | Portrait | null>(null);
-
-    const handleOeuvreClick = (oeuvre: Oeuvre | Portrait) => {
-        setSelectedOeuvre(oeuvre);
-        document.body.style.overflow = "hidden"; // Empêche le défilement de la page
-    };
-
-    const closeModal = () => {
-        setSelectedOeuvre(null);
-        document.body.style.overflow = "auto"; // Réactive le défilement
-    };
-
-    return (
-        <div className="mt-10">
-            <Title title="PORTFOLIO" />
-            <h1 className="text-3xl font-normal text-center text-accent mb-4">
-                Découvrez mes œuvres et projets artistiques
-            </h1>
-
-            <Title title="TABLEAUX ABSTRAITS" />
-            <div className="grid md:grid-cols-3 gap-4 mb-10">
-                {abstraits.map((abstrait) => (
-                    <div key={abstrait.id} className="bg-base-300 p-5 h-fit rounded-lg shadow-lg">
-                        <img
-                            src={abstrait.image}
-                            alt={abstrait.title}
-                            className="w-full rounded-xl h-56 object-cover cursor-pointer hover:opacity-90 transition-opacity"
-                            onClick={() => handleOeuvreClick(abstrait)}
-                        />
-                        <h1 className="my-2 font-bold">{abstrait.title}</h1>
-                        <p className=" line-clamp-2">{abstrait.description}</p>
-                    </div>
-                ))}
-            </div>
-
-            <Title title="TABLEAUX FIGURATIFS" />
-            <div className="grid md:grid-cols-3 gap-4">
-                {portraits.map((portrait) => (
-                    <div key={portrait.id} className="bg-base-300 p-5 h-fit rounded-lg shadow-lg">
-                        <img
-                            src={portrait.image}
-                            alt={portrait.title}
-                            className="w-full rounded-xl h-56 object-cover cursor-pointer hover:opacity-90 transition-opacity"
-                            onClick={() => handleOeuvreClick(portrait)}
-                        />
-                        <h1 className="my-2 font-bold">{portrait.title}</h1>
-                        <p className="text-gray-600 line-clamp-2">{portrait.description}</p>
-                    </div>
-                ))}
-            </div>
-
-            {/* Modal pour l'affichage en grand */}
-            {selectedOeuvre && (
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
-                    onClick={closeModal}
-                >
-                    <div className="relative w-full max-w-6xl max-h-[90vh]">
-                        <button
-                            onClick={closeModal}
-                            className="absolute -top-10 right-0 text-white text-4xl hover:text-accent transition-colors"
-                        >
-                            &times;
-                        </button>
-
-                        <div className="flex flex-col md:flex-row gap-8 h-full">
-                            {/* Image - prend toute la largeur sur mobile */}
-                            <div className="flex-1 md:max-w-[50%]">
-                                <img
-                                    src={selectedOeuvre.image}
-                                    alt={selectedOeuvre.title}
-                                    className="w-full max-h-[60vh] md:max-h-[80vh] object-contain"
-                                />
-                            </div>
-
-                            {/* Description - en dessous sur mobile, à côté sur desktop */}
-                            <div className="flex-1 text-white overflow-y-auto max-h-[30vh] md:max-h-[80vh] bg-black bg-opacity-50 p-4 rounded-lg">
-                                <h2 className="text-2xl md:text-3xl font-bold mb-4">{selectedOeuvre.title}</h2>
-                                <p className="whitespace-pre-line text-sm md:text-base">{selectedOeuvre.description}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </div>
-    );
+const container = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+        }
+    }
 };
 
+const item = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.5
+        }
+    }
+};
+
+const modalVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+            duration: 0.3,
+            ease: [0.2, 0.65, 0.3, 0.9]
+        }
+    },
+    exit: { opacity: 0, scale: 0.9 }
+};
+
+const Portfolio = () => {
+    const [activeTab, setActiveTab] = useState('abstrait');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedArt, setSelectedArt] = useState<Oeuvre | Portrait | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadedImages, setLoadedImages] = useState<{[key: string]: boolean}>({});
+
+    const openModal = useCallback((art: Oeuvre | Portrait) => {
+        setIsLoading(true);
+        setSelectedArt(art);
+        setIsModalOpen(true);
+        document.body.style.overflow = 'hidden';
+        
+        // Précharger l'image
+        const img = new Image();
+        img.src = art.image;
+        img.onload = () => setIsLoading(false);
+    }, []);
+
+    const closeModal = useCallback(() => {
+        setIsModalOpen(false);
+        document.body.style.overflow = 'auto';
+    }, []);
+
+    const handleImageLoad = useCallback((id: string) => {
+        setLoadedImages(prev => ({
+            ...prev,
+            [id]: true
+        }));
+    }, []);
+
+    const renderArt = useCallback((art: Oeuvre | Portrait) => {
+        const imageId = `img-${art.id}`;
+        const isLoaded = loadedImages[imageId];
+
+        return (
+            <motion.div
+                key={art.id}
+                variants={item}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                className="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:z-10"
+                onClick={() => openModal(art)}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+            >
+                <div className="relative overflow-hidden aspect-square bg-gray-50">
+                    {!isLoaded && (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-8 h-8 border-4 border-accent/30 border-t-accent rounded-full animate-spin"></div>
+                        </div>
+                    )}
+                    <LazyLoadImage
+                        src={art.image}
+                        alt={art.title}
+                        effect="opacity"
+                        className={`w-full h-full object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                        afterLoad={() => handleImageLoad(imageId)}
+                        threshold={100}
+
+                    />
+                    <motion.div 
+                        className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <motion.h3 
+                            className="text-white text-lg font-bold mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+                            initial={{ y: 20 }}
+                            whileHover={{ y: 0 }}
+                            transition={{ duration: 0.3, ease: 'easeOut' }}
+                        >
+                            {art.title}
+                        </motion.h3>
+                        {'description' in art && art.description && (
+                            <motion.p 
+                                className="text-gray-200 text-sm line-clamp-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75"
+                                initial={{ y: 20, opacity: 0 }}
+                                whileHover={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 0.3, delay: 0.1, ease: 'easeOut' }}
+                            >
+                                {art.description}
+                            </motion.p>
+                        )}
+                    </motion.div>
+                </div>
+            </motion.div>
+        );
+    }, [loadedImages, openModal, handleImageLoad]);
+
+    return (
+        <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="min-h-screen py-16 px-4 sm:px-6 lg:px-8"
+        >
+            <motion.div
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+            >
+                <Title title="PORTFOLIO" />
+            </motion.div>
+            
+            <div className="max-w-7xl mx-auto">
+                <motion.div 
+                    className="flex justify-center mb-12"
+                    initial={{ y: -20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                >
+                    <div className="inline-flex rounded-xl shadow-sm overflow-hidden" role="group">
+                        <motion.button
+                            onClick={() => setActiveTab('abstrait')}
+                            className={`px-6 py-3 text-sm font-medium ${activeTab === 'abstrait' 
+                                ? 'bg-accent text-white' 
+                                : 'text-white hover:bg-gray-100'} relative`}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            {activeTab === 'abstrait' && (
+                                <motion.span 
+                                    layoutId="tabIndicator"
+                                    className="absolute inset-0 bg-accent rounded-lg z-0"
+                                    initial={false}
+                                    transition={{ type: "spring", damping: 25, stiffness: 120, duration: 0.3 }}
+                                />
+                            )}
+                            <span className="relative z-10">Abstrait</span>
+                        </motion.button>
+                        <motion.button
+                            onClick={() => setActiveTab('figuratif')}
+                            className={`px-6 py-3 text-sm font-medium ${activeTab === 'figuratif' 
+                                ? 'bg-accent text-white' 
+                                : 'text-white hover:bg-gray-100'} relative`}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            {activeTab === 'figuratif' && (
+                                <motion.span 
+                                    layoutId="tabIndicator"
+                                    className="absolute inset-0 bg-accent rounded-lg z-0"
+                                    initial={false}
+                                    transition={{ type: "spring", damping: 25, stiffness: 120, duration: 0.3 }}
+                                />
+                            )}
+                            <span className="relative z-10">Figuratif</span>
+                        </motion.button>
+                    </div>
+                </motion.div>
+
+                <AnimatePresence mode="wait">
+                    <motion.div 
+                        key={activeTab}
+                        variants={container}
+                        initial="hidden"
+                        animate="visible"
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                    >
+                        {activeTab === 'abstrait' 
+                            ? abstraits.map(renderArt)
+                            : portraits.map(renderArt)
+                        }
+                    </motion.div>
+                </AnimatePresence>
+            </div>
+
+            <AnimatePresence>
+                {isModalOpen && selectedArt && (
+                    <motion.div 
+                        className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={closeModal}
+                    >
+                        <motion.div 
+                            className="rounded-2xl max-w-6xl w-full max-h-[90vh] flex flex-col bg-white"
+                            variants={modalVariants}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="flex-1 overflow-y-auto">
+                                <div className="relative flex items-center justify-center p-4">
+                                    <motion.button 
+                                        onClick={closeModal}
+                                        className="absolute top-4 right-4 rounded-full p-2 shadow-lg hover:bg-gray-100 z-10 backdrop-blur-sm bg-white/80"
+                                        whileHover={{ scale: 1.1 }}
+                                        whileTap={{ scale: 0.95 }}
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </motion.button>
+
+                                    {isLoading ? (
+                                        <div className="w-full h-96 flex items-center justify-center">
+                                            <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>
+                                        </div>
+                                    ) : (
+                                        <motion.img 
+                                            src={selectedArt.image} 
+                                            alt={selectedArt.title} 
+                                            className="w-full h-auto max-h-[60vh] object-contain"
+                                            initial={{ opacity: 0, scale: 0.95 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            transition={{ duration: 0.3 }}
+                                        />
+                                    )}
+                                </div>
+                                
+                                <motion.div 
+                                    className="p-6 bg-white border-t border-gray-200"
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.2 }}
+                                >
+                                    <h2 className="text-2xl font-bold mb-4 text-gray-900">{selectedArt.title}</h2>
+                                    {'description' in selectedArt && selectedArt.description && (
+                                        <div className="text-gray-700 max-h-[200px] overflow-y-auto pr-2">
+                                            {selectedArt.description.split('.').map((sentence, i, arr) => 
+                                                i < arr.length - 1 ? (
+                                                    <p key={i} className="mb-3">{sentence.trim()}.</p>
+                                                ) : (
+                                                    sentence.trim() && <p key={i}>{sentence.trim()}</p>
+                                                )
+                                            )}
+                                        </div>
+                                    )}
+                                </motion.div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
+    );
+};
 
 export default Portfolio;
