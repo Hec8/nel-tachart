@@ -9,7 +9,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center p-4  shadow-md">
             {/* Logo */}
             <Link to="/" className="flex items-center font-bold text-3xl md:text-xl">
-                <Palette className="mr-1" /><span className="mr-1">Nel</span><span className="text-accent">TACHART</span>
+                <Palette className="mr-1" /><span className="mr-1">Leonel</span><span className="text-accent">ZADJI</span>
             </Link>
 
             {/* Menu pour desktop */}

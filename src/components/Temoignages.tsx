@@ -8,7 +8,7 @@ import Zinkpe from "../assets/Témoignages/zinkpe.jpg";
 
 const testimonials = [
     { name: "Jean Patrick GUICHARD", image: JP, text: " J'adore comment il utilise les chiffres et symboles de mathématiques pour capter l'attention." },
-    { name: "Olouchola C. AKPO", image: Ochola, text: " Nel Tachart c'est un talentueux artiste béninois que je suis très fière de pousser vers le sommet." },
+    { name: "Olouchola C. AKPO", image: Ochola, text: " Leonel ZADJI c'est un talentueux artiste béninois que je suis très fière de pousser vers le sommet." },
     { name: "Romaric ATOKE", image: Romaric, text: "Léonel ZADJI a un talent pur, avec un bon accompagnement, il accomplira des merveilles. Il faut avouer que son travail est remarquable et assez unique, il a des grandes ambitions, je l'encourage vivement." },
     { name: "Yannel ADJOVI", image: Yannel, text: "J'aime beaucoup la manière dont il utilise des éléments recyclés comme les feuilles de tôles, des cadenas, etc sur du verre, c'est innovant." },
     { name: "Dominique ZINKPÈ", image: Zinkpe, text: "Moi j'aime beaucoup ce qu'il propose, son art est différent." }

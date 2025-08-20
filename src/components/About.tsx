@@ -49,8 +49,8 @@ const About = () => {
     };
 
     return (
-        <motion.div 
-            className="px-6 py-16 md:px-24 overflow-hidden" 
+        <motion.div
+            className="px-6 py-16 md:px-24 overflow-hidden"
             id="About"
             initial="hidden"
             whileInView="visible"
@@ -60,39 +60,39 @@ const About = () => {
             <motion.div variants={item}>
                 <Title title="L'ARTISTE" />
             </motion.div>
-            
+
             <div className="bg-base-200 flex justify-center items-center py-10 rounded-2xl overflow-hidden">
                 <div className="flex flex-col-reverse lg:flex-row items-center lg:items-start max-w-6xl mx-auto">
                     {/* Texte */}
-                    <motion.div 
+                    <motion.div
                         className="text-center lg:text-left space-y-6 lg:w-1/2 px-4 md:px-8"
                         variants={container}
                     >
-                        <motion.h1 
+                        <motion.h1
                             className="text-3xl md:text-5xl font-bold"
                             variants={item}
                         >
-                            A PROPOS DE NEL TACHART
+                            A PROPOS DE LEONEL ZADJI
                         </motion.h1>
-                        
-                        <motion.p 
+
+                        <motion.p
                             className="py-4 leading-relaxed text-lg"
                             variants={item}
                         >
-                            Nel Tachart de son vrai nom, Léonel ZADJI est un artiste béninois qui peint sur et sous du verre
+                            Leonel ZADJI est un artiste béninois qui peint sur et sous du verre
                             transparent, autodidacte, né le 1er Mars en 1997 à Cotonou au Bénin. Il a grandi dans les environs
                             de la Place de l'Etoile Rouge en plein centre-ville et réside actuellement à Dèkoungbé un quartier
                             populaire de Cotonou, où son univers est confiné dans un atelier.
                         </motion.p>
 
                         {/* Boutons de téléchargement */}
-                        <motion.div 
+                        <motion.div
                             className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                             variants={item}
                         >
                             <motion.a
                                 href={frenchPDF}
-                                download="Biographie-Nel-Tachart-FR.pdf"
+                                download="Biographie-Leonel-ZADJI-FR.pdf"
                                 className="btn btn-accent flex-1 transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
                                 whileHover={{ y: -2 }}
                                 whileTap={{ scale: 0.98 }}
@@ -101,7 +101,7 @@ const About = () => {
                             </motion.a>
                             <motion.a
                                 href={englishPDF}
-                                download="Biography-Nel-Tachart-EN.pdf"
+                                download="Biography-Leonel-ZADJI-EN.pdf"
                                 className="btn btn-outline btn-accent flex-1 transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
                                 whileHover={{ y: -2 }}
                                 whileTap={{ scale: 0.98 }}
@@ -112,19 +112,19 @@ const About = () => {
                     </motion.div>
 
                     {/* Image */}
-                    <motion.div 
+                    <motion.div
                         className="w-full lg:w-1/2 flex justify-center mb-6 lg:mb-0 px-4"
                         variants={image}
                         whileHover="hover"
                     >
-                        <motion.div 
+                        <motion.div
                             className="relative w-4/5 sm:w-3/5 md:w-1/2 lg:w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl"
                             initial={{ borderRadius: '1rem' }}
                         >
                             <img
                                 src={about}
                                 className="w-full h-auto object-cover"
-                                alt="À propos de Nel Tachart"
+                                alt="À propos de Leonel ZADJI"
                             />
                         </motion.div>
                     </motion.div>

@@ -52,34 +52,34 @@ const Home = () => {
                     animate="visible"
                     variants={imageVariants}
                 >
-                    <img 
-                        src={homepage} 
-                        alt="Page d'accueil" 
+                    <img
+                        src={homepage}
+                        alt="Page d'accueil"
                         className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-40"></div>
                 </motion.div>
-                
-                <motion.div 
+
+                <motion.div
                     className="hero-content text-neutral-content text-center relative z-10"
                     variants={containerVariants}
                 >
                     <motion.div className="max-w-2xl" variants={itemVariants}>
-                        <motion.h1 
+                        <motion.h1
                             className="mb-6 text-5xl md:text-7xl font-bold tracking-tight"
                             variants={itemVariants}
                         >
-                            NEL TACHART
+                            LEONEL ZADJI
                         </motion.h1>
-                        <motion.p 
+                        <motion.p
                             className="mb-8 text-xl md:text-2xl font-light tracking-wide"
                             variants={itemVariants}
                         >
                             Artiste peintre - Déco designer
                         </motion.p>
                         <motion.div variants={itemVariants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                            <Link 
-                                to="/portfolio" 
+                            <Link
+                                to="/portfolio"
                                 className="btn btn-accent btn-lg px-8 text-lg font-medium transform transition-all duration-300 hover:shadow-lg"
                             >
                                 Explorer mon art

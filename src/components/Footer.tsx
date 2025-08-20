@@ -12,7 +12,7 @@ const Footer = () => {
                     {/* Logo et infos */}
                     <div className="mb-6 md:mb-0 w-full">
                         <a href="/" className="flex items-center justify-center md:justify-start font-bold text-3xl">
-                            <Palette className="mr-2" /><span className="text-accent">TACHART</span>
+                            <Palette className="mr-2" /><span className="text-accent">LEONEL ZADJI</span>
                         </a>
                         <p className="mt-4 space-y-2">
                             <span className="flex justify-center md:justify-start items-center"><MapPin className="mr-2" /> Cotonou, Bénin</span>
@@ -34,7 +34,7 @@ const Footer = () => {
             </div>
             {/* Copyright */}
             <footer className="text-center p-4 bg-base-300 text-base-content">
-                <p>© 2024 - NEL TACHART Tous droits réservés</p>
+                <p>© 2024 - LEONEL ZADJI Tous droits réservés</p>
             </footer>
         </>
     );
